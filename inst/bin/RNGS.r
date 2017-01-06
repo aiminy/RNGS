@@ -34,7 +34,7 @@
 
     R_lib=.libPaths()[1]
 
-    cmd1="bsub -P bbc -J \"RunR\" -o %J.RunR.log -e %J.RunR.err -W 72:00 -n 8 -q general -u aimin.yan@med.miami.edu"
+    cmd1="bsub -P bbc -J \"RunRNGS\" -o %J.RunRNGS.log -e %J.RunRNGS.err -W 72:00 -n 8 -q general -u aimin.yan@med.miami.edu"
     cmd2=paste0("wget -c -r -nd -np -L ",input.file.dir," ","-P ",output.file.dir)
 
     system(paste0(cmd1," ",cmd2))
