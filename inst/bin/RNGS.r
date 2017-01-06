@@ -2,7 +2,9 @@
 
 #Usage:
 
-#Rscript  Rscript ~/RNGS/inst/bin/RNGS.r
+#R CMD INSTALL RNGS_0.1.0.tar.gz
+
+#Rscript  Rscript ~/R/lib64/R/library/RNGS/bin/RNGS.r
 
   cat("Do you want to download SRA files?\n")
 
