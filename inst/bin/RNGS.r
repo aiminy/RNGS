@@ -108,7 +108,7 @@
         }
 
         cat("please give input fastq file dir:\n")
-
+        #/projects/scratch/bbc/GOSJ/ExampleData/
         input<-file('stdin', 'r')
         input.file.dir <- readLines(input, n=1)
 
@@ -120,25 +120,25 @@
         #print(re)
 
          cat("please specify gene annotation file(GTF):\n")
-
+         #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
          input<-file('stdin', 'r')
          input.gtf.file <- readLines(input, n=1)
 
          cat("please specify STARindex file :\n")
-
+         #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Sequence/STARIndex/
          input<-file('stdin', 'r')
          STAR.index.file <- readLines(input, n=1)
 
 
          cat("please define the output file directory for this alignment:\n")
-
+         #/projects/scratch/bbc/GOSJ/ExampleData/
          input<-file('stdin', 'r')
          output.file.dir <- readLines(input, n=1)
         #
          R_lib=.libPaths()[1]
 
          cat("please define the number of core to be used:\n")
-
+         #8
          input<-file('stdin', 'r')
          Ncores <- readLines(input, n=1)
 
