@@ -135,7 +135,7 @@
          input<-file('stdin', 'r')
          output.file.dir <- readLines(input, n=1)
         #
-        # R_lib=.libPaths()[1]
+         R_lib=.libPaths()[1]
 
          cat("please define the number of core to be used:\n")
 
@@ -147,17 +147,59 @@
           cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
 
           cmd3=paste("STAR",strand,"--genomeLoad NoSharedMemory --runThreadN",Ncores,"--sjdbGTFfile",collapse = " ")
-          cmd4=paste(input.gtf.file,"--outFileNamePrefix",paste0(output.file.dir,"/STAR_"),"--genomeDir",STAR.index.file,collapse = " ")
+          cmd4=paste(input.gtf.file,"--outFileNamePrefix",collapse = " ")
+
+          cmd44=paste("--genomeDir",STAR.index.file,collapse = " ")
+
+
+          cmd11="bsub -w \"done(\"STAR-alignment\")\" -P bbc -J \"samtools-sort\" -o %J.samtools-sort.log -e %J.samtools-sort.err -W"
+
+          #cmd.wait="wait"
+
+          #CONVERTING SAM DIRECTLY TO A SORTED BAM FILE
+
+          #cmd6=paste("samtools view -bS -@", Ncores)
+
+
+
+          #system(paste0(cmd1," ",cmd2))
+
 
           for(i in 1:dim(re)[1]){
            cmd5=paste("--readFilesIn",re[i,1],re[i,2],collapse = " ")
-           system(paste(cmd1,cmd2,cmd3,cmd4,cmd5,collapse = " "))
+
+           sample.name=unlist(strsplit(basename(re[i,1]),"_"))[1]
+
+           cmd.each.sample=paste0(output.file.dir,"STAR_",sample.name)
+
+           system(paste(cmd1,cmd2,cmd3,cmd4,cmd.each.sample,cmd44,cmd5,collapse = " "))
+
+           #system(cmd.wait)
+
+           #cmd7=paste0(cmd.each.sample,"Aligned.out.sam | samtools sort -@ ",Ncores," - ",paste0(cmd.each.sample,"STAR_out.sorted"))
+
+           #cmd8=paste0(cmd.each.sample,"STAR_out.sorted")
+
+           cmd6=paste0("sh ",R_lib,"/RNGS/bin/Sam2BamAndSorting.sh ",cmd.each.sample," ",Ncores)
+
+           system(paste(cmd11,cmd2,cmd6,collapse = " "))
+
           }
+
+
 
         # #cmd2=paste0()
         # #system(cmd2)
         #
         # system("wait")
+
+
+
+         #system(paste(cmd1,cmd6,cmd7,cmd8,collapse = " "))
+
+
+          #table_cmd3 = cbind(com="samtools index", file=paste0(out_dir1,"/STAR_out.sorted.bam"))
+
         # cat("Finished converting SRA ...\n")
 
       }else{
