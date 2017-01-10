@@ -6,7 +6,7 @@
 #' @param  inputfile:bam file, gene annotation file,
 #' @param  outfile
 #'
-#' @return
+#' @return cmd to run QoRTs
 #' @export
 #'
 #' @examples
