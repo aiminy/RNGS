@@ -215,7 +215,7 @@
 
 
           cat("please give input bam file:\n")
-
+          #/projects/scratch/bbc/GOSJ/ExampleData/STAR_SRR1660309STAR_out.sorted.bam
           input<-file('stdin', 'r')
           input.bam.file <- readLines(input, n=1)
 
@@ -227,7 +227,8 @@
           #print(re)
 
           cat("please specify gene annotation file(GTF):\n")
-          #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
+          #/nethome/axy148/Annotation_ref/Homo_sapiens.GRCh38.84.processed.sorted.2.gtf
+          
           input<-file('stdin', 'r')
           input.gtf.file <- readLines(input, n=1)
 
