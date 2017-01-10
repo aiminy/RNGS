@@ -4,7 +4,7 @@
 
 #R CMD INSTALL RNGS_0.1.0.tar.gz
 
-#Rscript  Rscript ~/R/lib64/R/library/RNGS/bin/RNGS.r
+#Rscript  Rscript ~/R/lib64/R/library/RNGS/bin/RNGS_interactive_model.r
 
   cat("Do you want to download SRA files?\n")
 
@@ -46,8 +46,7 @@
 #    system(cmd2)
 
     cat("Finished downloading SRA ...\n")
-
-  }else{
+    }else{
 
     cat("Do you want to convert SRA files to fastq files?\n")
 
@@ -203,7 +202,53 @@
         # cat("Finished converting SRA ...\n")
 
       }else{
-           quit()}
-    }
 
-  }
+
+        cat("Do you want to get count using the sorted Bam files ?\n")
+
+        input<-file('stdin', 'r')
+        row <- readLines(input, n=1)
+
+        print(row)
+
+        if(row=="Yes"){
+
+
+          cat("please give input bam file:\n")
+
+          input<-file('stdin', 'r')
+          input.bam.file <- readLines(input, n=1)
+
+          #library(RNGS)
+          #re<-GetFastqFiles(input.file.dir)
+
+          #print(class(re))
+          #print(dim(re))
+          #print(re)
+
+          cat("please specify gene annotation file(GTF):\n")
+          #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
+          input<-file('stdin', 'r')
+          input.gtf.file <- readLines(input, n=1)
+
+
+          cat("please define the output file directory for this alignment:\n")
+          #/projects/scratch/bbc/GOSJ/ExampleData/
+          input<-file('stdin', 'r')
+          output.file.dir <- readLines(input, n=1)
+
+          output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
+
+          R_lib=.libPaths()[1]
+
+          cmd11="bsub -P bbc -J \"QoRT-count\" -o %J.QoRT-count.log -e %J.QoRT-count.err -W"
+          cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
+
+          cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")
+
+          system(paste(cmd11,cmd2,cmd6,collapse = " "))
+
+        }else{quit()}
+      }
+    }
+    }
