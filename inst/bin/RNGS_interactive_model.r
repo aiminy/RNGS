@@ -228,7 +228,7 @@
 
           cat("please specify gene annotation file(GTF):\n")
           #/nethome/axy148/Annotation_ref/Homo_sapiens.GRCh38.84.processed.sorted.2.gtf
-          
+
           input<-file('stdin', 'r')
           input.gtf.file <- readLines(input, n=1)
 
@@ -238,14 +238,24 @@
           input<-file('stdin', 'r')
           output.file.dir <- readLines(input, n=1)
 
-          output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
-
           R_lib=.libPaths()[1]
 
+          cat("Do you want to keep \"--keepMultiMapped\" :\n")
+          #Yes or No
+          input<-file('stdin', 'r')
+          choose.count <- readLines(input, n=1)
+
+          if(choose.count=="Yes"){
+          output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
           cmd11="bsub -P bbc -J \"QoRT-count\" -o %J.QoRT-count.log -e %J.QoRT-count.err -W"
           cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
-
-          cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")
+          cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts1.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")}else
+          {
+            output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
+            cmd11="bsub -P bbc -J \"QoRT-count\" -o %J.QoRT-count.log -e %J.QoRT-count.err -W"
+            cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
+            cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts2.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")
+          }
 
           system(paste(cmd11,cmd2,cmd6,collapse = " "))
 
