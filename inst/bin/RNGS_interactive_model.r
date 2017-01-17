@@ -246,13 +246,13 @@
           choose.count <- readLines(input, n=1)
 
           if(choose.count=="Yes"){
-          output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
-          cmd11="bsub -P bbc -J \"QoRT-count\" -o %J.QoRT-count.log -e %J.QoRT-count.err -W"
+          output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts_1")
+          cmd11="bsub -P bbc -J \"QoRT-count-1\" -o %J.QoRT-count-1.log -e %J.QoRT-count-1.err -W"
           cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
           cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts1.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")}else
           {
-            output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts")
-            cmd11="bsub -P bbc -J \"QoRT-count\" -o %J.QoRT-count.log -e %J.QoRT-count.err -W"
+            output.file.dir<-paste0(output.file.dir,basename(input.bam.file),"_QoRTCounts_2")
+            cmd11="bsub -P bbc -J \"QoRT-count-2\" -o %J.QoRT-count-2.log -e %J.QoRT-count-2.err -W"
             cmd2="72:00 -n 8 -q bigmem -R 'rusage[mem=36864] span[hosts=1]' -u aimin.yan@med.miami.edu"
             cmd6=paste("sh",paste0(R_lib,"/RNGS/bin/UseQoRTs2GetCounts2.sh"),input.bam.file,input.gtf.file,output.file.dir,collapse = " ")
           }
