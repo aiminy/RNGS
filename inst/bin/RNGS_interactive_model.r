@@ -134,6 +134,14 @@
          #/projects/scratch/bbc/GOSJ/ExampleData/
          input<-file('stdin', 'r')
          output.file.dir <- readLines(input, n=1)
+
+
+         if (!dir.exists(output.file.dir))
+         {
+           dir.create(output.file.dir)
+         }
+
+
         #
          R_lib=.libPaths()[1]
 
