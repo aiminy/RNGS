@@ -107,7 +107,7 @@
          strand=""
         }
 
-        cat("please give input fastq file dir:\n")
+        cat("please give input fastq file dir:ex(/scratch/projects/bbc/aiminy_project/DoGsFastq)\n")
         #/projects/scratch/bbc/GOSJ/ExampleData/
         input<-file('stdin', 'r')
         input.file.dir <- readLines(input, n=1)
@@ -119,18 +119,18 @@
         #print(dim(re))
         #print(re)
 
-         cat("please specify gene annotation file(GTF):\n")
+         cat("please specify gene annotation file(GTF),ex(/projects/ctsi/bbc/Genome_Ref/Homo_sapiens/UCSC/hg19/Annotation/Genes/gene.gtf)\n")
          #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
          input<-file('stdin', 'r')
          input.gtf.file <- readLines(input, n=1)
 
-         cat("please specify STARindex file :\n")
+         cat("please specify STARindex file :ex(/projects/ctsi/bbc/Genome_Ref/Homo_sapiens/UCSC/hg19/Sequence/STARIndex/)\n")
          #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Sequence/STARIndex/
          input<-file('stdin', 'r')
          STAR.index.file <- readLines(input, n=1)
 
 
-         cat("please define the output file directory for this alignment:\n")
+         cat("please define the output file directory for this alignment:ex(/scratch/projects/bbc/aiminy_project/DoGsAlignmentStar/)\n")
          #/projects/scratch/bbc/GOSJ/ExampleData/
          input<-file('stdin', 'r')
          output.file.dir <- readLines(input, n=1)
