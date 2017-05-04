@@ -6,6 +6,7 @@
 
 #Rscript  Rscript ~/R/lib64/R/library/RNGS/bin/RNGS_interactive_model.r
 
+
   cat("Do you want to download SRA files?\n")
 
   input<-file('stdin', 'r')
@@ -112,7 +113,7 @@
         input.file.dir <- readLines(input, n=1)
 
         library(RNGS)
-        re<-GetFastqFiles(input.file.dir)
+        re<-RNGS:::GetFastqFiles(input.file.dir)
 
         #print(class(re))
         #print(dim(re))
