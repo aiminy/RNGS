@@ -119,7 +119,8 @@
         #print(dim(re))
         #print(re)
 
-         cat("please specify gene annotation file(GTF),ex(/projects/ctsi/bbc/Genome_Ref/Homo_sapiens/UCSC/hg19/Annotation/Genes/gene.gtf)\n")
+         cat("please specify gene annotation file(GTF),ex(/projects/ctsi/bbc/Genome_Ref/Homo_sapiens/UCSC/hg19/Annotation/Genes/gene.gtf)\n or
+/projects/ctsi/bbc/Genome_Ref/Homo_sapiens/UCSC/hg19/Annotation/Genes/refGene.txt\n")
          #/nethome/yxb173/Genome_Ref/Homo_sapiens/UCSC/hg38/Annotation/Genes/genes.gtf
          input<-file('stdin', 'r')
          input.gtf.file <- readLines(input, n=1)
